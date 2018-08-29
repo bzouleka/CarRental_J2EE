@@ -1,5 +1,7 @@
 package com.campusnumerique.vehiclerental.entity;
 
+import org.json.JSONObject;
+
 public class Car {
 
 	private String id="";
@@ -14,6 +16,10 @@ public class Car {
 		setPlateNumber(plateNumber);
 	}
 	
+	public Car() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -37,5 +43,14 @@ public class Car {
 	}
 	public void setPlateNumber(String plateNumber) {
 		this.plateNumber = plateNumber;
+	}
+	
+	public JSONObject getInfos(){
+		JSONObject infos= new JSONObject();
+		infos.put("Marque", brand);
+		infos.put("Model", model);
+		infos.put("Immatriculation", plateNumber);
+		
+		return infos;
 	}
 }
