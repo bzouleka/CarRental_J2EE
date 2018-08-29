@@ -36,7 +36,7 @@
 	      <a class="nav-link" href="./clients.jsp">Client List</a>
 	    </li>
 	    <li class="nav-item">
-	      <a class="nav-link" href="./cars.jsp">Car List</a>
+	      <a class="nav-link" href="./CarServlet">Car List</a>
 	    </li>
 	   </ul>
 		
@@ -50,7 +50,10 @@
 						<th>Marque</th>
 						<th>Model</th>
 						<th>Immatriculation</th>
-						<th>Prix</th>
+						<th>Couleur</th>
+						<th>Prix Réservation</th>
+						<th>Prix au KM</th>
+						<th>Chevaux Fiscaux</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,9 +64,13 @@
 				{
 					%>
 					<tr>
-					<td>Marque <%=car.getBrand() %></td>    <!-- out.print("Marque : " + car.getBrand()); -->
-					<td>Modele <%=car.getModel() %></td>     <!-- out.print("Modele : " + car.getModel()); -->
-					<td>Immatriculation <%=car.getPlateNumber() %></td>    <!-- out.print("Immatriculation : " + car.getPlateNumber()); -->
+					<td><%=car.getBrand() %></td>    <!-- out.print("Marque : " + car.getBrand()); -->
+					<td><%=car.getModel() %></td>     <!-- out.print("Modele : " + car.getModel()); -->
+					<td><%=car.getPlateNumber() %></td>    <!-- out.print("Immatriculation : " + car.getPlateNumber()); -->
+					<td><%=car.getColor() %></td>
+					<td><%=car.getReservation() %></td>
+					<td><%=car.getKmRate() %></td>
+					<td><%=car.getCv() %></td>
 					</tr>
 					<%
 				}
