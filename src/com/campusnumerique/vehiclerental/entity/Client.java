@@ -1,5 +1,8 @@
 package com.campusnumerique.vehiclerental.entity;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.json.JSONObject;
@@ -109,5 +112,14 @@ public class Client {
 
 	public void setPermisDate(Date permisDate) {
 		this.permisDate = permisDate;
+	}
+	
+	public boolean isAdult(){
+		LocalDate now = LocalDate.now();
+		LocalDate l = this.birhtDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		if(Period.between(l, now).getYears() >= 18 ){
+			return true;
+		}
+		return false;
 	}
 }
