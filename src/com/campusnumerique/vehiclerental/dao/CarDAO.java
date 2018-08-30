@@ -38,13 +38,13 @@ public class CarDAO extends DAO<Car>{
 				).executeQuery("SELECT - FROM car where id = " + id);
 		if (result.first())
 			
-			car.setId(result.getString("id"));
+			car.setId(result.getInt("id"));
 			car.setBrand(result.getString("brand"));
 			car.setModel(result.getString("model"));
 			car.setPlateNumber(result.getString("plateNumber"));
 			car.setColor(result.getString("color"));
-			car.setReservation(result.getString("reservation"));
-			car.setKmRate(result.getString("kmRate"));
+			car.setReservation(result.getFloat("reservation"));
+			car.setKmRate(result.getFloat("kmRate"));
 			car.setCv(result.getString("cv"));
 			
 			
@@ -64,8 +64,8 @@ public class CarDAO extends DAO<Car>{
 			car.setModel(result.getString("model"));
 			car.setPlateNumber(result.getString("plateNumber"));
 			car.setColor(result.getString("color"));
-			car.setReservation(result.getString("reservation"));
-			car.setKmRate(result.getString("kmRate"));
+			car.setReservation(result.getFloat("reservation"));
+			car.setKmRate(result.getFloat("kmRate"));
 			car.setCv(result.getString("cv"));
 			
 			cars.add(car);

@@ -1,6 +1,9 @@
 package com.campusnumerique.vehiclerental.entity;
 
+import java.sql.SQLException;
 import java.util.Date;
+
+import com.campusnumerique.vehiclerental.dao.CarDAO;
 
 public class Reservation {
 	
@@ -61,5 +64,12 @@ public class Reservation {
 		this.id = id;
 	}
 
+	public float totalPrice(int id, int dist) throws SQLException{
+		CarDAO carDAO = new CarDAO();
+		Car currentCar = carDAO.find(id);
+		
+		float totalPrice = currentCar.getReservation() + (currentCar.getKmRate() * dist);
+		return totalPrice;
+	}
 	
 }

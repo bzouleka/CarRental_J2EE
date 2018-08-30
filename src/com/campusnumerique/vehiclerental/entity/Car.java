@@ -4,16 +4,16 @@ import org.json.JSONObject;
 
 public class Car {
 
-	private String id="";
-	private String brand="";
-	private String model="";
-	private String plateNumber="";
-	private String color="";
-	private String reservation="";
-	private String kmRate="";
-	private String cv="";
+	private int id;
+	private String brand;
+	private String model;
+	private String plateNumber;
+	private String color;
+	private float reservation;
+	private float kmRate;
+	private String cv;
 	
-	public Car(String id, String brand, String model, String plateNumber, String color, String reservation, String kmRate, String cv){
+	public Car(int id, String brand, String model, String plateNumber, String color, float reservation, float kmRate, String cv){
 		setId(id);
 		setBrand(brand);
 		setModel(model);
@@ -29,10 +29,10 @@ public class Car {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getBrand() {
@@ -61,20 +61,20 @@ public class Car {
 		this.cv = cv;
 	}
 
-	public String getKmRate(){
+	public float getKmRate(){
 		return kmRate;
 	}
-	public void setKmRate(String kmRate) {
+	public void setKmRate(float kmRate) {
 		
 		this.kmRate = kmRate;
 		
 	}
 
-	public String getReservation(){
+	public float getReservation(){
 		return reservation;
 	}
 	
-	public void setReservation(String reservation) {
+	public void setReservation(float reservation) {
 		this.reservation = reservation;
 	}
 
