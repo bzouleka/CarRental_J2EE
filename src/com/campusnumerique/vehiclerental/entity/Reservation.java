@@ -64,11 +64,8 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public float totalPrice(int dist) throws SQLException{
-		CarDAO carDAO = new CarDAO();
-		Car currentCar = carDAO.find(this.car.getId());
-		
-		float totalPrice = currentCar.getReservation() + (currentCar.getKmRate() * dist);
+	public float totalPrice(int dist){
+		float totalPrice = car.getReservation() + (car.getKmRate() * dist);
 		return totalPrice;
 	}
 	
