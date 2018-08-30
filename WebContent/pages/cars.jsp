@@ -64,9 +64,9 @@
 				{
 					%>
 					<tr>
-					<td><%=car.getBrand() %></td>    <!-- out.print("Marque : " + car.getBrand()); -->
-					<td><%=car.getModel() %></td>     <!-- out.print("Modele : " + car.getModel()); -->
-					<td><%=car.getPlateNumber() %></td>    <!-- out.print("Immatriculation : " + car.getPlateNumber()); -->
+					<td><%=car.getBrand() %></td>    
+					<td><%=car.getModel() %></td>    
+					<td><%=car.getPlateNumber() %></td>
 					<td><%=car.getColor() %></td>
 					<td><%=car.getReservation() %></td>
 					<td><%=car.getKmRate() %></td>
