@@ -21,43 +21,50 @@ public class Client {
 	private Date birhtDate;
 	private Date permisDate;
 	private boolean isGuest;
-	
-	public Client(){
+
+	public Client() {
 		setLogin("guest");
 		setGuest(true);
 	}
-	
-	public Client(int id, String login, String firstName, String lastName, String mail){
+
+	public Client(int id, String login, String firstName, String lastName, String mail) {
 		setId(id);
-		setLogin(login);  
+		setLogin(login);
 		setFirstName(firstName);
 		setLastName(lastName);
 		setMail(mail);
 		setGuest(false);
 	}
-	
+
 	public String getLogin() {
 		return login;
 	}
+
 	public void setLogin(String login) {
-		if(login!=null && !login.equals(""))
+		if (login != null && !login.equals(""))
 			this.login = login;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getMail() {
 		return mail;
 	}
+
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
@@ -77,9 +84,9 @@ public class Client {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public JSONObject getInfos(){
-		JSONObject infos= new JSONObject();
+
+	public JSONObject getInfos() {
+		JSONObject infos = new JSONObject();
 		infos.put("login", login);
 		infos.put("id", id);
 		infos.put("firstName", firstName);
@@ -88,8 +95,8 @@ public class Client {
 		infos.put("isGuest", isGuest);
 		return infos;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return getInfos().toString();
 	}
 
@@ -116,50 +123,50 @@ public class Client {
 	public void setPermisDate(Date permisDate) {
 		this.permisDate = permisDate;
 	}
-	
-	public boolean isAdult(){
+
+	public boolean isAdult() {
 		LocalDate now = LocalDate.now();
 		LocalDate l = this.birhtDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		if(Period.between(l, now).getYears() >= 18 ){
+		if (Period.between(l, now).getYears() >= 18) {
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean hasBooked(Date startDate, Date finishDate) throws SQLException{
+
+	public boolean hasBooked(Date startDate, Date finishDate) throws SQLException {
 		ReservationDAO reservationDAO = new ReservationDAO();
 		Reservation reservation = reservationDAO.findByClientId(this.id);
-		if(reservation == null){
+		if (reservation == null) {
 			return true;
 		}
-		if(bookingPossible(reservationDAO, startDate, finishDate, reservation)){
+		if (bookingPossible(reservationDAO, startDate, finishDate, reservation)) {
 			return true;
 		}
 		return false;
 	}
-	
-	private boolean bookingPossible(ReservationDAO reservationDAO, Date startDate, Date finishDate, Reservation reservation){
-		if(isBetween(startDate, reservation.getStartDate(), reservation.getEndDate())){
+
+	private boolean bookingPossible(ReservationDAO reservationDAO, Date startDate, Date finishDate,
+			Reservation reservation) {
+		if (isBetween(startDate, reservation.getStartDate(), reservation.getEndDate())) {
 			return false;
 		}
-		if(isBetween(finishDate, reservation.getStartDate(), reservation.getEndDate())){
+		if (isBetween(finishDate, reservation.getStartDate(), reservation.getEndDate())) {
 			return false;
 		}
-		if(isBetween(reservation.getStartDate(), startDate, finishDate)){
+		if (isBetween(reservation.getStartDate(), startDate, finishDate)) {
 			return false;
 		}
 		return true;
 	}
-	
-	private boolean isBetween(Date dateBooking, Date startDate, Date endDate){		
-		
-		if (dateBooking.after(startDate) && dateBooking.before(endDate) ){
-		
+
+	private boolean isBetween(Date dateBooking, Date startDate, Date endDate) {
+
+		if (dateBooking.after(startDate) && dateBooking.before(endDate)) {
+
 			return true;
 		}
 		return false;
-					
-		}
-	
-	
+
+	}
+
 }

@@ -1,3 +1,4 @@
+
 package com.campusnumerique.vehiclerental.entity;
 
 import java.sql.SQLException;
