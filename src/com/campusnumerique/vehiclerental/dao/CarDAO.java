@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.campusnumerique.vehiclerental.entity.Car;
 
-public class CarDAO extends DAO<Car>{
+public class CarDAO extends DAO<Car> {
 
 	@Override
 	public boolean create(Car obj) {
@@ -31,13 +31,12 @@ public class CarDAO extends DAO<Car>{
 	@Override
 	public Car find(int id) throws SQLException {
 		Car car = new Car();
-		
-		ResultSet result = this.connection.createStatement(
-				ResultSet.TYPE_SCROLL_INSENSITIVE,
-				ResultSet.CONCUR_READ_ONLY
-				).executeQuery("SELECT - FROM car where id = " + id);
-		if (result.first())
-			
+
+		ResultSet result = this.connection
+				.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+				.executeQuery("SELECT - FROM car where id = " + id);
+		if (result.first()) {
+
 			car.setId(result.getInt("id"));
 			car.setBrand(result.getString("brand"));
 			car.setModel(result.getString("model"));
@@ -46,19 +45,19 @@ public class CarDAO extends DAO<Car>{
 			car.setReservation(result.getFloat("reservation"));
 			car.setKmRate(result.getFloat("kmRate"));
 			car.setCv(result.getString("cv"));
-			
-			
-		return car;
-		
+
+			return car;
+		}
+		return null;
 	}
 
 	@Override
 	public List<Car> findAll() throws SQLException {
 		ArrayList<Car> cars = new ArrayList<Car>();
-		ResultSet result = this.connection.createStatement(
-				ResultSet.TYPE_SCROLL_INSENSITIVE,
-				ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM car");
-		while(result.next()){
+		ResultSet result = this.connection
+				.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+				.executeQuery("SELECT * FROM car");
+		while (result.next()) {
 			Car car = new Car();
 			car.setBrand(result.getString("brand"));
 			car.setModel(result.getString("model"));
@@ -67,16 +66,11 @@ public class CarDAO extends DAO<Car>{
 			car.setReservation(result.getFloat("reservation"));
 			car.setKmRate(result.getFloat("kmRate"));
 			car.setCv(result.getString("cv"));
-			
+
 			cars.add(car);
 		}
-					
+
 		return cars;
 	}
-	
-	
-
-	
-	
 
 }
