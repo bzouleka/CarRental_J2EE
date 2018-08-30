@@ -40,15 +40,23 @@ public class ReservationDAO extends DAO<Reservation>{
 	
 	public Reservation findByCarId(int carId) throws SQLException {
 		Reservation reservation = new Reservation();
+		CarDAO carDAO = new CarDAO();
+		ClientDAO clientDAO = new ClientDAO();
 		ResultSet result = this.connection.createStatement(
 		ResultSet.TYPE_SCROLL_INSENSITIVE,
 		ResultSet.CONCUR_READ_ONLY
-		).executeQuery("SELECT - FROM car where car_id = " + carId);
-		if (result.first())
+		).executeQuery("SELECT * FROM reservation WHERE car_id = " + carId);
+		if (result.first()){
 			
-			reservation.setId(result.getInt("car_id"));
-			
+			reservation.setId(result.getInt("id"));
+			reservation.setStartDate(result.getDate("startDate"));
+			reservation.setEndDate(result.getDate("endDate"));
+			reservation.setCar(carDAO.find(result.getInt("car_id")));
+			reservation.setClient(clientDAO.find(result.getInt("client_id")));
 		
+			return reservation;
+		}
+			
 		return null;
 	}
 
