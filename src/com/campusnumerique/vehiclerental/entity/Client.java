@@ -1,11 +1,14 @@
 package com.campusnumerique.vehiclerental.entity;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
 import org.json.JSONObject;
+
+import com.campusnumerique.vehiclerental.dao.ReservationDAO;
 
 public class Client {
 
@@ -122,4 +125,41 @@ public class Client {
 		}
 		return false;
 	}
+	
+	public boolean hasBooked(Date startDate, Date finishDate) throws SQLException{
+		ReservationDAO reservationDAO = new ReservationDAO();
+		Reservation reservation = reservationDAO.findByClientId(this.id);
+		if(reservation == null){
+			return true;
+		}
+		if(bookingPossible(reservationDAO, startDate, finishDate, reservation)){
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean bookingPossible(ReservationDAO reservationDAO, Date startDate, Date finishDate, Reservation reservation){
+		if(isBetween(startDate, reservation.getStartDate(), reservation.getEndDate())){
+			return false;
+		}
+		if(isBetween(finishDate, reservation.getStartDate(), reservation.getEndDate())){
+			return false;
+		}
+		if(isBetween(reservation.getStartDate(), startDate, finishDate)){
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean isBetween(Date dateBooking, Date startDate, Date endDate){		
+		
+		if (dateBooking.after(startDate) && dateBooking.before(endDate) ){
+		
+			return true;
+		}
+		return false;
+					
+		}
+	
+	
 }

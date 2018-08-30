@@ -53,10 +53,28 @@ public class ReservationDAO extends DAO<Reservation>{
 			reservation.setEndDate(result.getDate("endDate"));
 			reservation.setCar(carDAO.find(result.getInt("car_id")));
 			reservation.setClient(clientDAO.find(result.getInt("client_id")));
-		
+			return reservation;
+		}	
+		return null;
+	}
+	
+	public Reservation findByClientId(int clientId) throws SQLException{
+		Reservation reservation = new Reservation();
+		CarDAO carDAO = new CarDAO();
+		ClientDAO clientDAO = new ClientDAO();
+		ResultSet result = this.connection.createStatement(
+		ResultSet.TYPE_SCROLL_INSENSITIVE,
+		ResultSet.CONCUR_READ_ONLY
+		).executeQuery("SELECT * FROM reservation WHERE client_id = " + clientId);
+		if (result.first()){
+			
+			reservation.setId(result.getInt("id"));
+			reservation.setStartDate(result.getDate("startDate"));
+			reservation.setEndDate(result.getDate("endDate"));
+			reservation.setCar(carDAO.find(result.getInt("car_id")));
+			reservation.setClient(clientDAO.find(result.getInt("client_id")));
 			return reservation;
 		}
-			
 		return null;
 	}
 
