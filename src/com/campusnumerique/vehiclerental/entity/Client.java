@@ -14,7 +14,7 @@ public class Client {
 	private String permisNb;
 	private Date birhtDate;
 	private Date permisDate;
-	private boolean isGuest=false;
+	private boolean isGuest;
 	
 	public Client(){
 		setLogin("guest");
