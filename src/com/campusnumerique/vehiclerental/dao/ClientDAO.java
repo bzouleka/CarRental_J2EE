@@ -38,8 +38,13 @@ public class ClientDAO extends DAO<Client>{
 		    ResultSet.CONCUR_READ_ONLY
 		  ).executeQuery("SELECT * FROM client WHERE id = " + id);
 		if(result.first())
-			client = new Client(id, result.getString("login"), result.getString("firstName"), result.getString("lastName"), result.getString("mail"));         
-		
+			client.setId(result.getInt("id"));
+			client.setFirstName(result.getString("firstName"));
+			client.setLastName(result.getString("lastName"));
+			client.setMail(result.getString("mail"));
+			client.setPermisNb(result.getString("permisNb"));
+			client.setBirhtDate(result.getDate("birthDate"));
+			client.setPermisDate(result.getDate("permisDate"));
 		return client;
 	}
 
@@ -52,28 +57,14 @@ public class ClientDAO extends DAO<Client>{
 		  ).executeQuery("SELECT * FROM client");
 		while(result.next()){
 			Client client = new Client(); 
-			client = new Client(result.getInt("id"), result.getString("login"), result.getString("firstName"), result.getString("lastName"), result.getString("mail"));    
+			client.setId(result.getInt("id"));
+			client.setFirstName(result.getString("firstName"));
+			client.setLastName(result.getString("lastName"));
+			client.setMail(result.getString("mail"));
+			client.setPermisNb(result.getString("permisNb"));
+			client.setBirhtDate(result.getDate("birthDate"));
+			client.setPermisDate(result.getDate("permisDate"));    
 			clients.add(client);
-		}
-		return clients;
-	}
-
-	public JSONArray findAllAsJson(){
-		JSONArray clients = new JSONArray();
-		ResultSet result;
-		try {
-			result = this.connection.createStatement(
-			    ResultSet.TYPE_SCROLL_INSENSITIVE, 
-			    ResultSet.CONCUR_READ_ONLY
-			  ).executeQuery("SELECT * FROM client");
-			while(result.next()){
-				Client client = new Client(); 
-				client = new Client(result.getInt("id"), result.getString("login"), result.getString("firstName"), result.getString("lastName"), result.getString("mail"));    
-				clients.put(client.getInfos());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return clients;
 	}
