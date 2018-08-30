@@ -1,14 +1,19 @@
 package com.campusnumerique.vehiclerental.entity;
 
+import java.util.Date;
+
 import org.json.JSONObject;
 
 public class Client {
 
-	private int id=0;
-	private String login="";
-	private String firstName="";
-	private String lastName="";
-	private String mail="";
+	private int id;
+	private String login;
+	private String firstName;
+	private String lastName;
+	private String mail;
+	private String permisNb;
+	private Date birhtDate;
+	private Date permisDate;
 	private boolean isGuest=false;
 	
 	public Client(){
@@ -80,5 +85,29 @@ public class Client {
 	
 	public String toString(){
 		return getInfos().toString();
+	}
+
+	public String getPermisNb() {
+		return permisNb;
+	}
+
+	public void setPermisNb(String permisNb) {
+		this.permisNb = permisNb;
+	}
+
+	public Date getBirhtDate() {
+		return birhtDate;
+	}
+
+	public void setBirhtDate(Date birhtDate) {
+		this.birhtDate = birhtDate;
+	}
+
+	public Date getPermisDate() {
+		return permisDate;
+	}
+
+	public void setPermisDate(Date permisDate) {
+		this.permisDate = permisDate;
 	}
 }
