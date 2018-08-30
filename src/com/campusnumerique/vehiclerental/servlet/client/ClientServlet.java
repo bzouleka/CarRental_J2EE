@@ -14,9 +14,6 @@ import org.json.JSONObject;
 
 import com.campusnumerique.vehiclerental.dao.ClientDAO;
 
-/**
- * Servlet implementation class MyServlet
- */
 @WebServlet("/ClientServlet")
 public class ClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

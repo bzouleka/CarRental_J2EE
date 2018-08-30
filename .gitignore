@@ -6,3 +6,4 @@
 # ignore Intellij Idea project files
 .idea
 *.iml
+/bin/

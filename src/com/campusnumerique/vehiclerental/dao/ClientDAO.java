@@ -47,6 +47,7 @@ public class ClientDAO extends DAO<Client>{
 			client.setPermisDate(result.getDate("permisDate"));
 		return client;
 	}
+	
 
 	@Override
 	public List<Client> findAll() throws SQLException{
