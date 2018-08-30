@@ -1,6 +1,11 @@
 package com.campusnumerique.vehiclerental.entity;
 
+import java.sql.SQLException;
+
 import org.json.JSONObject;
+
+import com.campusnumerique.vehiclerental.dao.CarDAO;
+import com.campusnumerique.vehiclerental.dao.ReservationDAO;
 
 public class Car {
 
@@ -12,8 +17,10 @@ public class Car {
 	private float reservation;
 	private float kmRate;
 	private String cv;
-	
-	public Car(int id, String brand, String model, String plateNumber, String color, float reservation, float kmRate, String cv){
+	private Reservation booked;
+
+	public Car(int id, String brand, String model, String plateNumber, String color, float reservation, float kmRate,
+			String cv) {
 		setId(id);
 		setBrand(brand);
 		setModel(model);
@@ -23,8 +30,7 @@ public class Car {
 		setKmRate(kmRate);
 		setCv(cv);
 	}
-	
-	
+
 	public Car() {
 		// TODO Auto-generated constructor stub
 	}
@@ -32,63 +38,71 @@ public class Car {
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getBrand() {
 		return brand;
 	}
+
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
+
 	public String getModel() {
 		return model;
 	}
+
 	public void setModel(String model) {
 		this.model = model;
 	}
+
 	public String getPlateNumber() {
 		return plateNumber;
 	}
+
 	public void setPlateNumber(String plateNumber) {
 		this.plateNumber = plateNumber;
 	}
-	
-	public String getCv(){
+
+	public String getCv() {
 		return cv;
 	}
-	public void setCv(String cv) {		
+
+	public void setCv(String cv) {
 		this.cv = cv;
 	}
 
-	public float getKmRate(){
+	public float getKmRate() {
 		return kmRate;
 	}
+
 	public void setKmRate(float kmRate) {
-		
+
 		this.kmRate = kmRate;
-		
+
 	}
 
-	public float getReservation(){
+	public float getReservation() {
 		return reservation;
 	}
-	
+
 	public void setReservation(float reservation) {
 		this.reservation = reservation;
 	}
 
-	public String getColor(){
+	public String getColor() {
 		return color;
 	}
-	
+
 	public void setColor(String color) {
-		this.color= color;
+		this.color = color;
 	}
 
-	
-	public JSONObject getInfos(){
-		JSONObject infos= new JSONObject();
+	public JSONObject getInfos() {
+		JSONObject infos = new JSONObject();
 		infos.put("Marque", brand);
 		infos.put("Model", model);
 		infos.put("Immatriculation", plateNumber);
@@ -96,7 +110,17 @@ public class Car {
 		infos.put("Réservation", reservation);
 		infos.put("Prix kilométrique", kmRate);
 		infos.put("Chevaux fiscaux", cv);
-		
+
 		return infos;
 	}
+
+	public boolean isAvailable() throws SQLException {
+		ReservationDAO reservationDAO = new ReservationDAO();
+
+		if (reservationDAO.findByCarId(this.id) == null) {
+			return true;
+		}
+		return false;
+	}
+
 }

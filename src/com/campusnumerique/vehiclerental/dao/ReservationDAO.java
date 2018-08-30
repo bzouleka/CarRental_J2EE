@@ -1,5 +1,6 @@
 package com.campusnumerique.vehiclerental.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -36,5 +37,20 @@ public class ReservationDAO extends DAO<Reservation>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Reservation findByCarId(int carId) throws SQLException {
+		Reservation reservation = new Reservation();
+		ResultSet result = this.connection.createStatement(
+		ResultSet.TYPE_SCROLL_INSENSITIVE,
+		ResultSet.CONCUR_READ_ONLY
+		).executeQuery("SELECT - FROM car where car_id = " + carId);
+		if (result.first())
+			
+			reservation.setId(result.getInt("car_id"));
+			
+		
+		return null;
+	}
+
 
 }
