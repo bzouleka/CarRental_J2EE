@@ -138,19 +138,17 @@ public class Client {
 		return Period.between(l, now).getYears();
 	}
 
-	public boolean hasBooked(Date startDate, Date finishDate) throws SQLException {
-		ReservationDAO reservationDAO = new ReservationDAO();
-		Reservation reservation = reservationDAO.findByClientId(this.id);
+	public boolean hasBooked(Date startDate, Date finishDate, Reservation reservation) throws SQLException {
 		if (reservation == null) {
 			return true;
 		}
-		if (bookingPossible(reservationDAO, startDate, finishDate, reservation)) {
+		if (bookingPossible( startDate, finishDate, reservation)) {
 			return true;
 		}
 		return false;
 	}
 
-	private boolean bookingPossible(ReservationDAO reservationDAO, Date startDate, Date finishDate,
+	private boolean bookingPossible( Date startDate, Date finishDate,
 			Reservation reservation) {
 		if (isBetween(startDate, reservation.getStartDate(), reservation.getEndDate())) {
 			return false;

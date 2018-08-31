@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.campusnumerique.vehiclerental.dao.ClientDAO;
+import com.campusnumerique.vehiclerental.dao.ReservationDAO;
 import com.campusnumerique.vehiclerental.entity.Client;
 import com.campusnumerique.vehiclerental.entity.Reservation;
 
@@ -64,33 +65,52 @@ public class formReservationServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		Client client = new Client();
-		client.setFirstName(firstName);
-		client.setLastName(lastName);
-		client.setMail(email);
-		client.setPermisNb(permisNb);
-		client.setBirhtDate(birthDate);
-
-		if (!client.isAdult()) {
+		Client currentClient = new Client();
+		currentClient.setFirstName(firstName);
+		currentClient.setLastName(lastName);
+		currentClient.setMail(email);
+		currentClient.setPermisNb(permisNb);
+		currentClient.setBirhtDate(birthDate);
+		
+		
+		if (!currentClient.isAdult()) {
 			// Message erreur trop jeune
+		}
+		Client client = null;
+		ClientDAO clientDAO = new ClientDAO();
+		try {
+			client = clientDAO.findByPermisNb(permisNb);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if( client == null){
+			client = currentClient;
+			clientDAO.create(client);
+		}
+		
+		ReservationDAO reservationDAO = new ReservationDAO();
+		Reservation reservation = null;
+		try {
+			reservation = reservationDAO.findByClientId(client.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		
 		try {
-			if (client.hasBooked(startDate, finishDate)) {
-				// Message erreur deja une location
+			if (client.hasBooked(startDate, finishDate, reservation)) {
+						// Message erreur deja une location
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		Reservation reservation = new Reservation();
+		
+		reservation.setCar(null);
 		reservation.setClient(client);
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(finishDate);
 		
-		ClientDAO clientDAO = new ClientDAO();
-		clientDAO.create(client);
+				
 
 		doGet(request, response);
 	}

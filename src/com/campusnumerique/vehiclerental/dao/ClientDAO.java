@@ -70,4 +70,21 @@ public class ClientDAO extends DAO<Client>{
 		return clients;
 	}
 
+	public Client findByPermisNb(String permisNb) throws SQLException{
+		Client client = new Client();  
+		
+		ResultSet result = this.connection.createStatement(
+		    ResultSet.TYPE_SCROLL_INSENSITIVE, 
+		    ResultSet.CONCUR_READ_ONLY
+		  ).executeQuery("SELECT * FROM client WHERE permisNb = " + permisNb);
+		if(result.first())
+			client.setId(result.getInt("id"));
+			client.setFirstName(result.getString("firstName"));
+			client.setLastName(result.getString("lastName"));
+			client.setMail(result.getString("mail"));
+			client.setPermisNb(result.getString("permisNb"));
+			client.setBirhtDate(result.getDate("birthDate"));
+			client.setPermisDate(result.getDate("permisDate"));
+		return client;
+	}
 }
