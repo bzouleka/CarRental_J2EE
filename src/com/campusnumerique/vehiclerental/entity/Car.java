@@ -108,18 +108,18 @@ public class Car {
 		this.color = color;
 	}
 
-	public JSONObject getInfos() {
-		JSONObject infos = new JSONObject();
-		infos.put("Marque", brand);
-		infos.put("Model", model);
-		infos.put("Immatriculation", plateNumber);
-		infos.put("Couleur", color);
-		infos.put("Réservation", reservation);
-		infos.put("Prix kilométrique", kmRate);
-		infos.put("Chevaux fiscaux", cv);
-
-		return infos;
-	}
+//	public JSONObject getInfos() {
+//		JSONObject infos = new JSONObject();
+//		infos.put("Marque", brand);
+//		infos.put("Model", model);
+//		infos.put("Immatriculation", plateNumber);
+//		infos.put("Couleur", color);
+//		infos.put("Réservation", reservation);
+//		infos.put("Prix kilométrique", kmRate);
+//		infos.put("Chevaux fiscaux", cv);
+//
+//		return infos;
+//	}
 
 	public boolean isAvailable(Date startDate, Date finishDate) throws SQLException {
 		ReservationDAO reservationDAO = new ReservationDAO();

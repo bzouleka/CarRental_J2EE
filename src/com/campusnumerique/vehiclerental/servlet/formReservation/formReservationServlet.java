@@ -37,7 +37,7 @@ public class formReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("pages/formReservation.jsp").forward(request, response);
+		request.getRequestDispatcher("pages/carAvailable.jsp").forward(request, response);
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
