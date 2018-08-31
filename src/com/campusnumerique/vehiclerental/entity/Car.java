@@ -2,15 +2,10 @@
 package com.campusnumerique.vehiclerental.entity;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 
 import org.json.JSONObject;
 
-import com.campusnumerique.vehiclerental.dao.CarDAO;
 import com.campusnumerique.vehiclerental.dao.ReservationDAO;
 
 public class Car {
@@ -23,8 +18,6 @@ public class Car {
 	private float reservation;
 	private float kmRate;
 	private int cv;
-	private Reservation booked;
-	private Client client;
 
 	public Car(int id, String brand, String model, String plateNumber, String color, float reservation, float kmRate,
 			int cv) {
@@ -108,18 +101,6 @@ public class Car {
 		this.color = color;
 	}
 
-//	public JSONObject getInfos() {
-//		JSONObject infos = new JSONObject();
-//		infos.put("Marque", brand);
-//		infos.put("Model", model);
-//		infos.put("Immatriculation", plateNumber);
-//		infos.put("Couleur", color);
-//		infos.put("Réservation", reservation);
-//		infos.put("Prix kilométrique", kmRate);
-//		infos.put("Chevaux fiscaux", cv);
-//
-//		return infos;
-//	}
 
 	public boolean isAvailable(Date startDate, Date finishDate) throws SQLException {
 		ReservationDAO reservationDAO = new ReservationDAO();
@@ -159,21 +140,8 @@ public class Car {
 		return true;
 	}
 
-	// fonction qui permet de calculer l'âge du client par rapport à sa date de
-	// naissance.
-
-	//private int calculateAge(Date birthDate) {
-	//	LocalDate now = LocalDate.now();
-	//	LocalDate l = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-	//	if ((birthDate != null) && (now != null)) {
-	//		return Period.between(l, now).getYears();
-	//	}
-	//	return 0;
-
-	//}
-
 	//selection par age des vehicule par cv
-	private boolean byAge(Client client) {
+	public boolean byAge(Client client) {
 		int age = client.getAge();
 		if (age > 25) {
 			return true;

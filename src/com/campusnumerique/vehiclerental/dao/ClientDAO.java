@@ -1,7 +1,10 @@
 package com.campusnumerique.vehiclerental.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +16,31 @@ public class ClientDAO extends DAO<Client>{
 
 	@Override
 	public boolean create(Client obj) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		PreparedStatement ps;
+		String sql = "INSERT INTO client(firstName,lastName,mail,birthDate,permisNb,getPermisDate)VALUES(?,?,?,?,?,?)";
+		
+		try {
+			ps = (PreparedStatement) this.connection
+					.prepareStatement(sql);
+			
+			java.sql.Date sqlBirthDate = new java.sql.Date(obj.getBirhtDate().getTime());
+			java.sql.Date sqlPermisDate = new java.sql.Date(obj.getPermisDate().getTime());
+			
+			ps.setString(1, obj.getFirstName());
+			ps.setString(2, obj.getLastName());
+			ps.setString(3, obj.getMail());
+			ps.setDate(4, sqlBirthDate);
+			ps.setString(5, obj.getPermisNb());
+			ps.setDate(6, sqlPermisDate);
+
+			ps.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		return true;
 	}
 
 	@Override
@@ -71,20 +97,22 @@ public class ClientDAO extends DAO<Client>{
 	}
 
 	public Client findByPermisNb(String permisNb) throws SQLException{
-		Client client = new Client();  
+		Client client =null;  
 		
 		ResultSet result = this.connection.createStatement(
 		    ResultSet.TYPE_SCROLL_INSENSITIVE, 
 		    ResultSet.CONCUR_READ_ONLY
 		  ).executeQuery("SELECT * FROM client WHERE permisNb = " + permisNb);
-		if(result.first())
+		if(result.first()){
+			client = new Client();
 			client.setId(result.getInt("id"));
 			client.setFirstName(result.getString("firstName"));
 			client.setLastName(result.getString("lastName"));
 			client.setMail(result.getString("mail"));
 			client.setPermisNb(result.getString("permisNb"));
 			client.setBirhtDate(result.getDate("birthDate"));
-			client.setPermisDate(result.getDate("permisDate"));
+			client.setPermisDate(result.getDate("getPermisDate"));
+		}
 		return client;
 	}
 }
