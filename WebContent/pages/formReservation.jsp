@@ -46,42 +46,40 @@
 		<form method="post" action="./reservation">
 			<div class="form-group">
 				<label for="nom">Nom</label> <input type="text" class="form-control"
-					id="nom" placeholder="Votre nom">
+					id="nom" name="nom" value="Verges" placeholder="Votre nom">
 			</div>
 			<div class="form-group">
 				<label for="prenom">Prenom</label> <input type="text"
-					class="form-control" id="prenom" placeholder="Votre prénom">
+					class="form-control" id="prenom" name="prenom" value="Vincent" placeholder="Votre prénom">
 			</div>
 			<div class="form-group">
 				<label for="email">E-mail</label> <input type="email"
-					class="form-control" id="email" placeholder="Votre adresse e-mail">
+					class="form-control" id="email" name="email" value="vincent.verges@gmail.com" placeholder="Votre adresse e-mail">
 			</div>
 			<div class="form-group">
 				<label for="permisNb">Numéro de permis</label> <input type="text"
-					class="form-control" id="permisNb"
+					class="form-control" id="permisNb" name="permisNb" value="123456789"
 					placeholder="Votre numéro de permis">
 			</div>
 			<div class="form-group">
 				<label for="permisDate">Date d'obtention du permis</label> <input type="date"
-					class="form-control" id="permisDate
-				">
+					class="form-control" id="permisDate" name="permisDate">
 			</div>
 			<div class="form-group">
 				<label for="birthDate">Date de naissance</label> <input type="date"
-					class="form-control" id="birthDate
-				">
+					class="form-control" id="birthDate" name="birthDate">
 			</div>
 			<div class="form-group">
 				<label for="distance">Distance prévue en km</label> <input type="text"
-					class="form-control" id="distance" placeholder="Km parcourus">
+					class="form-control" id="distance" name="distance" placeholder="Km parcourus">
 			</div>
 			<div class="form-group">
 				<label for="startDate">Date de départ</label> <input type="date"
-					class="form-control" id="startDate">
+					class="form-control" id="startDate" name="startDate">
 			</div>
 			<div class="form-group">
 				<label for="finishDate">Date d'arrivée</label> <input type="date"
-					class="form-control" id="finishDate">
+					class="form-control" id="finishDate" name="finishDate">
 			</div>
 			<button type="submit" class="btn btn-primary mb-2">Reserver</button>
 		</form>

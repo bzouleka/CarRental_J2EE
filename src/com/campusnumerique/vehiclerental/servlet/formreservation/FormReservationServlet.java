@@ -39,6 +39,8 @@ public class FormReservationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
+
+		System.out.print("doGet");
 		request.getRequestDispatcher("pages/formReservation.jsp").forward(request, response);
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
@@ -50,6 +52,7 @@ public class FormReservationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
 		Date birthDate = null;
 		Date startDate = null;
 		Date finishDate = null;
@@ -58,19 +61,18 @@ public class FormReservationServlet extends HttpServlet {
 		String lastName = request.getParameter("nom");
 		String firstName = request.getParameter("prenom");
 		String email = request.getParameter("email");
-		String permisNb = request.getParameter("premisNb");
+		String permisNb = request.getParameter("permisNb");
+		
+		
 		String distanceString = request.getParameter("distance");
 		
-		System.out.print(firstName);
-		
-		
 		int distance = Integer.parseInt(distanceString);
-
+		
 		try {
-			birthDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("birthDate"));
-			startDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("startDate"));
-			finishDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("finishDate"));
-			permisDate = new SimpleDateFormat("dd/MM/yyy").parse(request.getParameter("permisDate"));
+			birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthDate"));
+			startDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("startDate"));
+			finishDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("finishDate"));
+			permisDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("permisDate"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -85,7 +87,7 @@ public class FormReservationServlet extends HttpServlet {
 		
 		
 		if (!currentClient.isAdult()) {
-			// Message erreur trop jeune
+			System.out.print("enfant");
 		}
 		Client client = null;
 		ClientDAO clientDAO = new ClientDAO();
@@ -121,6 +123,7 @@ public class FormReservationServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		reservation = new Reservation();
 		reservation.setCar(null);
 		reservation.setClient(client);
 		reservation.setStartDate(startDate);
@@ -128,8 +131,8 @@ public class FormReservationServlet extends HttpServlet {
 		
 		request.setAttribute("reservation", reservation);
 		request.setAttribute("distance", distance);
-		RequestDispatcher req = request.getRequestDispatcher("recapitulatif.jsp");
-		req.include(request, response);
+		RequestDispatcher req = request.getRequestDispatcher("carAvailable.jsp");
+		req.forward(request, response);
 
 	}
 
