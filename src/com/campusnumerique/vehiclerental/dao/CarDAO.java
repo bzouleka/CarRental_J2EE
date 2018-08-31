@@ -44,7 +44,7 @@ public class CarDAO extends DAO<Car> {
 			car.setColor(result.getString("color"));
 			car.setReservation(result.getFloat("reservation"));
 			car.setKmRate(result.getFloat("kmRate"));
-			car.setCv(result.getString("cv"));
+			car.setCv(result.getInt("cv"));
 
 			return car;
 		}
@@ -65,7 +65,7 @@ public class CarDAO extends DAO<Car> {
 			car.setColor(result.getString("color"));
 			car.setReservation(result.getFloat("reservation"));
 			car.setKmRate(result.getFloat("kmRate"));
-			car.setCv(result.getString("cv"));
+			car.setCv(result.getInt("cv"));
 
 			cars.add(car);
 		}
