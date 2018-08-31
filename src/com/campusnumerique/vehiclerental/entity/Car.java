@@ -162,19 +162,19 @@ public class Car {
 	// fonction qui permet de calculer l'âge du client par rapport à sa date de
 	// naissance.
 
-	private int calculateAge(Date birthDate) {
-		LocalDate now = LocalDate.now();
-		LocalDate l = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		if ((birthDate != null) && (now != null)) {
-			return Period.between(l, now).getYears();
-		}
-		return 0;
+	//private int calculateAge(Date birthDate) {
+	//	LocalDate now = LocalDate.now();
+	//	LocalDate l = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	//	if ((birthDate != null) && (now != null)) {
+	//		return Period.between(l, now).getYears();
+	//	}
+	//	return 0;
 
-	}
+	//}
 
 	//selection par age des vehicule par cv
 	private boolean byAge(Client client) {
-		int age = calculateAge(client.getBirhtDate());
+		int age = client.getAge();
 		if (age > 25) {
 			return true;
 		}
