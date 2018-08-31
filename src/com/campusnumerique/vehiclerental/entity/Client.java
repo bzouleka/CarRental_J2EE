@@ -125,12 +125,17 @@ public class Client {
 	}
 
 	public boolean isAdult() {
-		LocalDate now = LocalDate.now();
-		LocalDate l = this.birhtDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		if (Period.between(l, now).getYears() >= 18) {
+		
+		if ( this.getAge() >= 18) {
 			return true;
 		}
 		return false;
+	}
+	
+	public int getAge() {
+		LocalDate now = LocalDate.now();
+		LocalDate l = this.birhtDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return Period.between(l, now).getYears();
 	}
 
 	public boolean hasBooked(Date startDate, Date finishDate) throws SQLException {
