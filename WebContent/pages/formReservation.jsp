@@ -43,7 +43,7 @@
 	</nav>
 	<div class="container" id="content">
 		<h1 align="center">Réservez votre voiture</h1>
-		<form>
+		<form method="post" action="./reservation">
 			<div class="form-group">
 				<label for="nom">Nom</label> <input type="text" class="form-control"
 					id="nom" placeholder="Votre nom">
@@ -62,22 +62,28 @@
 					placeholder="Votre numéro de permis">
 			</div>
 			<div class="form-group">
+				<label for="permisDate">Date d'obtention du permis</label> <input type="date"
+					class="form-control" id="permisDate
+				">
+			</div>
+			<div class="form-group">
 				<label for="birthDate">Date de naissance</label> <input type="date"
 					class="form-control" id="birthDate
-				"
-					placeholder="Votre numéro de permis">
+				">
+			</div>
+			<div class="form-group">
+				<label for="distance">Distance prévue en km</label> <input type="text"
+					class="form-control" id="distance" placeholder="Km parcourus">
 			</div>
 			<div class="form-group">
 				<label for="startDate">Date de départ</label> <input type="date"
-					class="form-control" id="startDate"
-					placeholder="Votre numéro de permis">
+					class="form-control" id="startDate">
 			</div>
 			<div class="form-group">
 				<label for="finishDate">Date d'arrivée</label> <input type="date"
-					class="form-control" id="finishDate"
-					placeholder="Votre numéro de permis">
+					class="form-control" id="finishDate">
 			</div>
-			<button type="submit" class="btn btn-dark mb-2">Reserver</button>
+			<button type="submit" class="btn btn-primary mb-2">Reserver</button>
 		</form>
 	</div>
 </body>

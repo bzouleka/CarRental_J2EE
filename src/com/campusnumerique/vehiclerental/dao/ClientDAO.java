@@ -1,7 +1,9 @@
 package com.campusnumerique.vehiclerental.dao;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +15,35 @@ public class ClientDAO extends DAO<Client>{
 
 	@Override
 	public boolean create(Client obj) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		Statement stmt = null;
+		try {
+			stmt = this.connection.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		String sql = "INSERT INTO client(firstName,lastName,mail,birthDate,permisNb,getPermisDate)VALUES("
+				+ obj.getFirstName() + ","
+				+ obj.getLastName() + ","
+				+ obj.getMail() + ","
+				+ obj.getBirhtDate() + ","
+				+ obj.getPermisNb() + ","
+				+ obj.getPermisDate() + ")";
+		
+		try {
+			stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 
 	@Override

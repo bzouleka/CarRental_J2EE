@@ -8,4 +8,8 @@
     <servlet-name>CarServlet</servlet-name>
     <servlet-class>com.campusnumerique.vehiclerental.servlet.client.CarServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>FormReservationServlet</servlet-name>
+    <servlet-class>com.campusnumerique.vehiclerental.servlet.client.FormReservationServlet</servlet-class>
+  </servlet>
 </web-app>

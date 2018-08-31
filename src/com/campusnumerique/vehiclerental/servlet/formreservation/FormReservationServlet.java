@@ -1,4 +1,4 @@
-package com.campusnumerique.vehiclerental.servlet.formReservation;
+package com.campusnumerique.vehiclerental.servlet.formreservation;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,13 +22,13 @@ import com.campusnumerique.vehiclerental.entity.Reservation;
  * Servlet implementation class formReservation
  */
 @WebServlet("/reservation")
-public class formReservationServlet extends HttpServlet {
+public class FormReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public formReservationServlet() {
+	public FormReservationServlet() {
 		super();
 	}
 
@@ -37,6 +38,7 @@ public class formReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	
 		request.getRequestDispatcher("pages/formReservation.jsp").forward(request, response);
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
@@ -51,16 +53,24 @@ public class formReservationServlet extends HttpServlet {
 		Date birthDate = null;
 		Date startDate = null;
 		Date finishDate = null;
+		Date permisDate = null;
 
 		String lastName = request.getParameter("nom");
 		String firstName = request.getParameter("prenom");
 		String email = request.getParameter("email");
 		String permisNb = request.getParameter("premisNb");
+		String distanceString = request.getParameter("distance");
+		
+		System.out.print(firstName);
+		
+		
+		int distance = Integer.parseInt(distanceString);
 
 		try {
 			birthDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("birthDate"));
 			startDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("startDate"));
 			finishDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("finishDate"));
+			permisDate = new SimpleDateFormat("dd/MM/yyy").parse(request.getParameter("permisDate"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -71,6 +81,7 @@ public class formReservationServlet extends HttpServlet {
 		currentClient.setMail(email);
 		currentClient.setPermisNb(permisNb);
 		currentClient.setBirhtDate(birthDate);
+		currentClient.setPermisDate(permisDate);
 		
 		
 		if (!currentClient.isAdult()) {
@@ -87,6 +98,11 @@ public class formReservationServlet extends HttpServlet {
 		if( client == null){
 			client = currentClient;
 			clientDAO.create(client);
+			try {
+				client = clientDAO.findByPermisNb(client.getPermisNb());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		ReservationDAO reservationDAO = new ReservationDAO();
@@ -110,9 +126,11 @@ public class formReservationServlet extends HttpServlet {
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(finishDate);
 		
-				
+		request.setAttribute("reservation", reservation);
+		request.setAttribute("distance", distance);
+		RequestDispatcher req = request.getRequestDispatcher("recapitulatif.jsp");
+		req.include(request, response);
 
-		doGet(request, response);
 	}
 
 }
