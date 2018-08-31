@@ -38,6 +38,9 @@
 	    <li class="nav-item">
 	      <a class="nav-link" href="./CarServlet">Car List</a>
 	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="./reservation.jsp">Réservation</a>
+	    </li>
 	   </ul>
 		
 	</nav>

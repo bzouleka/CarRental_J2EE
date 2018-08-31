@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="UTF-8"%>
+	
+<%@page import="com.campusnumerique.vehiclerental.entity.Client" %>
+<%@page import="com.campusnumerique.vehiclerental.entity.Car"%>	
+<%@page import="com.campusnumerique.vehiclerental.entity.Reservation"%>	
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 
 <jsp:useBean id="client" scope="session"
 	class="com.campusnumerique.vehiclerental.bean.ClientBean" />
@@ -35,25 +41,35 @@
 	      <a class="nav-link" href="/CarServlet">Car List</a>
 	    </li>
 	    <li class="nav-item">
-	      <a class="nav-link" href="./reservation.jsp">Réservation</a>
+	      <a class="nav-link" href="./reservation.jsp">Liste des vehicules</a>
 	    </li>
-	   </ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li>User Connected: <%= client.getLogin() %></li>
-		</ul>
+	   </ul>		
 	</nav>
 	<div class="container" id="content">
 		<div class="row">
-			<h2>Client List</h2>
+			<h1 align="center">Choix du vehicule</h1>
 			<table id="userTable" class="table table-striped">
 				<thead>
-					<tr>
-						<th>Login</th>
-						<th>First Name</th>
-						<th>Last Name</th>
-					</tr>
+				
+					<% String lastName = request.getParameter("nom"); %> 
+					<% String firstName = request.getParameter("prenom"); %>
+					<% String permisNb = request.getParameter("permisNb"); %> 
+					
 				</thead>
 				<tbody>
+					<% List<Car> cars = (ArrayList<Car>)request.getAttribute("cars");
+					Reservation reservation = new Reservation();
+				
+				for(Car car : cars)
+				{
+					%>
+					<tr>
+					//<td><input type="radio" value="<%=car.isAvailable(reservation.getStartDate(), reservation.getEndDate()) %>"></td>    				
+					</tr>
+					<%
+				}
+				
+				%>
 		
 				</tbody>
 			</table>
