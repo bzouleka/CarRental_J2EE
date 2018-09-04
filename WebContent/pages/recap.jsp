@@ -56,12 +56,12 @@
 		${ reservation.endDate}<br>
 		</div>
 		<br>
-		<div class="container" id="content" style="text-align="center">
-		${reservation.car.brand}
-		${ reservation.car.model }
-		${ reservation.car.plateNumber }
-		${ reservation.car.color }
-		${ reservation.car.cv }
+		<div class="container" style="text-align="center">
+		<p> Marque : ${reservation.car.brand}</p>
+		<p> Model : ${ reservation.car.model }</p>
+		<p> Immatriculation : ${ reservation.car.plateNumber }</p>
+		<p> Couleur : ${ reservation.car.color }</p>
+		<p> Chevaux fiscaux : ${ reservation.car.cv }</p>
 		
 		
 		</div>
