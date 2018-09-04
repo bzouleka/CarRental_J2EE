@@ -34,7 +34,7 @@ public class CarDAO extends DAO<Car> {
 
 		ResultSet result = this.connection
 				.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
-				.executeQuery("SELECT - FROM car where id = " + id);
+				.executeQuery("SELECT * FROM car where id = " + id);
 		if (result.first()) {
 
 			car.setId(result.getInt("id"));

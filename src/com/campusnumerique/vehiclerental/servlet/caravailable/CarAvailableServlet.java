@@ -82,7 +82,7 @@ public class CarAvailableServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		int distance = (int) session.getAttribute("distance");
-		Reservation reservation = (Reservation) session.getAttribute("reservtion");
+		Reservation reservation = (Reservation) session.getAttribute("reservation");
 		
 		String idSelectCarString = request.getParameter("selection");
 		int idSelectCar = Integer.parseInt(idSelectCarString);

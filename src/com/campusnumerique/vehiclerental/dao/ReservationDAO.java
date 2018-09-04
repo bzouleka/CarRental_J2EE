@@ -26,7 +26,7 @@ public class ReservationDAO extends DAO<Reservation>{
 			ps.setInt(1, obj.getCar().getId());
 			ps.setInt(2, obj.getClient().getId());
 			ps.setDate(3, sqlStartDate);
-			ps.setDate(3, sqlEndDate);
+			ps.setDate(4, sqlEndDate);
 			
 			ps.executeUpdate();
 			

@@ -44,12 +44,31 @@
 		<li class="nav-item"><a class="nav-link" href="./reservation.jsp">Liste
 				des vehicules</a></li>
 		</ul>
+		</nav>
+		<div style="text-align="center"><h1>Récapitulatif de votre réservation</h1></div>
+		
+		<br> <br>
+		
+		<div class="container" id="content" style="text-align="center">
+		${ reservation.client.firstName }<br>
+		${ reservation.client.lastName }<br>
+		${ reservation.startDate}<br>
+		${ reservation.endDate}<br>
+		</div>
+		<br>
+		<div class="container" id="content" style="text-align="center">
+		${reservation.car.brand}
+		${ reservation.car.model }
+		${ reservation.car.plateNumber }
+		${ reservation.car.color }
+		${ reservation.car.cv }
 		
 		
-		<h1>Récapitulatif de votre réservation</h1>
+		</div>
 		
-		<p>${ reservation.client.firstName }</p>
-		<p>${ reservation.client.lastName }</p>
+		
+		
+		
 		
 		
 		
