@@ -72,7 +72,7 @@
 							for (Car car : cars) {
 						%>
 						<tr>
-							<td><input type="radio" id="selection" name="choix"
+							<td><input type="radio" id="selection" name="selection"
 								value="<%=car.getId()%>" /></td>
 							<td><%=car.getBrand()%></td>
 							<td><%=car.getModel()%></td>

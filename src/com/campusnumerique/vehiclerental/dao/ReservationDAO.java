@@ -10,7 +10,6 @@ public class ReservationDAO extends DAO<Reservation>{
 
 	@Override
 	public boolean create(Reservation obj) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

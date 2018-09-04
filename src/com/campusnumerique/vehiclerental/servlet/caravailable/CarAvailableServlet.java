@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.campusnumerique.vehiclerental.dao.CarDAO;
+import com.campusnumerique.vehiclerental.dao.ReservationDAO;
 import com.campusnumerique.vehiclerental.entity.Car;
 import com.campusnumerique.vehiclerental.entity.Reservation;
 
@@ -73,8 +74,27 @@ public class CarAvailableServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		HttpSession session = request.getSession();
+		int distance = (int) session.getAttribute("distance");
+		Reservation reservation = (Reservation) session.getAttribute("reservtion");
+		
+		String idSelectCarString = request.getParameter("selection");
+		int idSelectCar = Integer.parseInt(idSelectCarString);
+		
+		CarDAO carDAO = new CarDAO();
+		try {
+			Car seletedCar = carDAO.find(idSelectCar);
+			reservation.setCar(seletedCar);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		ReservationDAO reservationDAO = new ReservationDAO();
+		reservationDAO.create(reservation);
+		
+		float totalPrice = reservation.totalPrice(distance);
+			
 		
 	}
 
