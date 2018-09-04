@@ -3,6 +3,7 @@ package com.campusnumerique.vehiclerental.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import com.campusnumerique.vehiclerental.entity.Reservation;
@@ -49,7 +50,7 @@ public class ReservationDAO extends DAO<Reservation>{
 
 	@Override
 	public Reservation find(int id) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -69,9 +70,12 @@ public class ReservationDAO extends DAO<Reservation>{
 		).executeQuery("SELECT * FROM reservation WHERE car_id = " + carId);
 		if (result.first()){
 			
+		Date startDate =  new Date(result.getDate("startDate").getTime());
+		Date endDate = new Date(result.getDate("endDate").getTime());
+			
 			reservation.setId(result.getInt("id"));
-			reservation.setStartDate(result.getDate("startDate"));
-			reservation.setEndDate(result.getDate("endDate"));
+			reservation.setStartDate(startDate);
+			reservation.setEndDate(endDate);
 			reservation.setCar(carDAO.find(result.getInt("car_id")));
 			reservation.setClient(clientDAO.find(result.getInt("client_id")));
 			return reservation;
@@ -88,10 +92,14 @@ public class ReservationDAO extends DAO<Reservation>{
 		ResultSet.CONCUR_READ_ONLY
 		).executeQuery("SELECT * FROM reservation WHERE client_id = " + clientId);
 		if (result.first()){
+			
+			Date startDate =  new Date(result.getDate("startDate").getTime());
+			Date endDate = new Date(result.getDate("endDate").getTime());
+			
 			reservation = new Reservation();
 			reservation.setId(result.getInt("id"));
-			reservation.setStartDate(result.getDate("startDate"));
-			reservation.setEndDate(result.getDate("endDate"));
+			reservation.setStartDate(startDate);
+			reservation.setEndDate(endDate);
 			reservation.setCar(carDAO.find(result.getInt("car_id")));
 			reservation.setClient(clientDAO.find(result.getInt("client_id")));
 			return reservation;
