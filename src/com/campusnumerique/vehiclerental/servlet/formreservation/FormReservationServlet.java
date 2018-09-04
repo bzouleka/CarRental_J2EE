@@ -86,8 +86,10 @@ public class FormReservationServlet extends HttpServlet {
 		
 		
 		if (!currentClient.isAdult()) {
-			System.out.print("enfant");
-		}
+			String error = "Vous êtes mineur !!!";
+			request.setAttribute("error", error);
+			doGet(request,response);
+		} else {
 		Client client = null;
 		ClientDAO clientDAO = new ClientDAO();
 		try {
@@ -132,7 +134,7 @@ public class FormReservationServlet extends HttpServlet {
 		request.setAttribute("distance", distance);
 		RequestDispatcher req = request.getRequestDispatcher("/carAvailable");
 		req.forward(request, response);
-
+		}
 	}
 
 }
