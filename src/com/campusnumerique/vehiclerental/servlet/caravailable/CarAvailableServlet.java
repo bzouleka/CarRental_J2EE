@@ -21,13 +21,13 @@ import com.campusnumerique.vehiclerental.entity.Reservation;
  * Servlet implementation class CarAvailable
  */
 @WebServlet("/carAvailable")
-public class CarAvailable extends HttpServlet {
+public class CarAvailableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        private CarDAO carDAO = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CarAvailable() {
+    public CarAvailableServlet() {
         super();
         carDAO = new CarDAO();
     }
