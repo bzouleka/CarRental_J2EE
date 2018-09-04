@@ -2,6 +2,7 @@ package com.campusnumerique.vehiclerental.servlet.caravailable;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,13 +21,13 @@ import com.campusnumerique.vehiclerental.entity.Reservation;
  * Servlet implementation class CarAvailable
  */
 @WebServlet("/carAvailable")
-public class CarAvailable extends HttpServlet {
+public class CarAvailableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        private CarDAO carDAO = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CarAvailable() {
+    public CarAvailableServlet() {
         super();
         carDAO = new CarDAO();
     }
@@ -40,7 +41,7 @@ public class CarAvailable extends HttpServlet {
 		int distance = (int) request.getAttribute("distance");
 		
 		List<Car> allCars = null;		
-		List<Car> cars = null;
+		List<Car> cars = new ArrayList<Car>();
 		
 		Date startDate = reservation.getStartDate();
 		Date endDate = reservation.getEndDate();
@@ -59,9 +60,7 @@ public class CarAvailable extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("cars", cars);
-		request.getRequestDispatcher("pages/carAvailable.jsp").forward(request, response);
-		response.setStatus(HttpServletResponse.SC_OK);
+		
 	}
 
 	/**

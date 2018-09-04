@@ -49,22 +49,36 @@
 		<div class="row">
 			<h1 align="center">Choix du vehicule</h1>
 			<table id="userTable" class="table table-striped">
+			
+			
 				<thead>
 				
-					<% String lastName = request.getParameter("nom"); %> 
-					<% String firstName = request.getParameter("prenom"); %>
-					<% String permisNb = request.getParameter("permisNb"); %> 
+					<tr>
+						<th>Marque</th>
+						<th>Model</th>
+						<th>Immatriculation</th>
+						<th>Couleur</th>
+						<th>Prix Réservation</th>
+						<th>Prix au KM</th>
+						<th>Chevaux Fiscaux</th>
+					</tr> 
 					
 				</thead>
 				<tbody>
-					<% List<Car> cars = (ArrayList<Car>)request.getAttribute("cars");
-					Reservation reservation = new Reservation();
 				
+					<% List<Car> cars = (List<Car>)request.getAttribute("cars");
+					
 				for(Car car : cars)
 				{
 					%>
 					<tr>
-					//<td><input type="radio" value="<%=car.isAvailable(reservation.getStartDate(), reservation.getEndDate()) %>"></td>    				
+					<td><%=car.getBrand() %></td>    
+					<td><%=car.getModel() %></td>    
+					<td><%=car.getPlateNumber() %></td>
+					<td><%=car.getColor() %></td>
+					<td><%=car.getReservation() %></td>
+					<td><%=car.getKmRate() %></td>
+					<td><%=car.getCv() %></td>
 					</tr>
 					<%
 				}
