@@ -1,14 +1,11 @@
 package com.campusnumerique.vehiclerental.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONArray;
+import java.util.Date;
 
 import com.campusnumerique.vehiclerental.entity.Client;
 
@@ -63,14 +60,20 @@ public class ClientDAO extends DAO<Client>{
 		    ResultSet.TYPE_SCROLL_INSENSITIVE, 
 		    ResultSet.CONCUR_READ_ONLY
 		  ).executeQuery("SELECT * FROM client WHERE id = " + id);
-		if(result.first())
+
+		if(result.first()){
+			
+			Date birthDate = new Date(result.getDate("birthDate").getTime());
+			Date permisDate = new Date(result.getDate("permisDate").getTime());
+			
 			client.setId(result.getInt("id"));
 			client.setFirstName(result.getString("firstName"));
 			client.setLastName(result.getString("lastName"));
 			client.setMail(result.getString("mail"));
 			client.setPermisNb(result.getString("permisNb"));
-			client.setBirhtDate(result.getDate("birthDate"));
-			client.setPermisDate(result.getDate("permisDate"));
+			client.setBirhtDate(birthDate);
+			client.setPermisDate(permisDate);
+		}
 		return client;
 	}
 	
@@ -83,14 +86,18 @@ public class ClientDAO extends DAO<Client>{
 		    ResultSet.CONCUR_READ_ONLY
 		  ).executeQuery("SELECT * FROM client");
 		while(result.next()){
+			
+			Date birthDate = new Date(result.getDate("birthDate").getTime());
+			Date permisDate = new Date(result.getDate("permisDate").getTime());
+			
 			Client client = new Client(); 
 			client.setId(result.getInt("id"));
 			client.setFirstName(result.getString("firstName"));
 			client.setLastName(result.getString("lastName"));
 			client.setMail(result.getString("mail"));
 			client.setPermisNb(result.getString("permisNb"));
-			client.setBirhtDate(result.getDate("birthDate"));
-			client.setPermisDate(result.getDate("permisDate"));    
+			client.setBirhtDate(birthDate);
+			client.setPermisDate(permisDate);    
 			clients.add(client);
 		}
 		return clients;
@@ -104,14 +111,18 @@ public class ClientDAO extends DAO<Client>{
 		    ResultSet.CONCUR_READ_ONLY
 		  ).executeQuery("SELECT * FROM client WHERE permisNb = " + permisNb);
 		if(result.first()){
+			
+			Date birthDate = new Date(result.getDate("birthDate").getTime());
+			Date permisDate = new Date(result.getDate("permisDate").getTime());
+			
 			client = new Client();
 			client.setId(result.getInt("id"));
 			client.setFirstName(result.getString("firstName"));
 			client.setLastName(result.getString("lastName"));
 			client.setMail(result.getString("mail"));
 			client.setPermisNb(result.getString("permisNb"));
-			client.setBirhtDate(result.getDate("birthDate"));
-			client.setPermisDate(result.getDate("getPermisDate"));
+			client.setBirhtDate(birthDate);
+			client.setPermisDate(permisDate);
 		}
 		return client;
 	}

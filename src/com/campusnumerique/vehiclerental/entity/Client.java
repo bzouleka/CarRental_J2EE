@@ -8,8 +8,6 @@ import java.util.Date;
 
 import org.json.JSONObject;
 
-import com.campusnumerique.vehiclerental.dao.ReservationDAO;
-
 public class Client {
 
 	private int id;

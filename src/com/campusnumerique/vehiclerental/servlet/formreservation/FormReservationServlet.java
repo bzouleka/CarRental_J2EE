@@ -130,7 +130,7 @@ public class FormReservationServlet extends HttpServlet {
 		
 		request.setAttribute("reservation", reservation);
 		request.setAttribute("distance", distance);
-		RequestDispatcher req = request.getRequestDispatcher("pages/carAvailable.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/carAvailable");
 		req.forward(request, response);
 
 	}
