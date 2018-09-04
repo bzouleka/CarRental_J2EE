@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.campusnumerique.vehiclerental.dao.ClientDAO;
 import com.campusnumerique.vehiclerental.dao.ReservationDAO;
+import com.campusnumerique.vehiclerental.entity.Car;
 import com.campusnumerique.vehiclerental.entity.Client;
 import com.campusnumerique.vehiclerental.entity.Reservation;
 
@@ -122,14 +123,14 @@ public class FormReservationServlet extends HttpServlet {
 		}
 		
 		reservation = new Reservation();
-		reservation.setCar(null);
+		reservation.setCar(new Car());
 		reservation.setClient(client);
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(finishDate);
 		
 		request.setAttribute("reservation", reservation);
 		request.setAttribute("distance", distance);
-		RequestDispatcher req = request.getRequestDispatcher("carAvailable.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("pages/carAvailable.jsp");
 		req.forward(request, response);
 
 	}
