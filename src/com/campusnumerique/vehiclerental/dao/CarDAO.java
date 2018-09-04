@@ -59,6 +59,7 @@ public class CarDAO extends DAO<Car> {
 				.executeQuery("SELECT * FROM car");
 		while (result.next()) {
 			Car car = new Car();
+			car.setId(result.getInt("id"));
 			car.setBrand(result.getString("brand"));
 			car.setModel(result.getString("model"));
 			car.setPlateNumber(result.getString("plateNumber"));

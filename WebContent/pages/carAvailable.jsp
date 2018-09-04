@@ -53,7 +53,8 @@
 			
 				<thead>
 				
-					<tr>
+					<tr>		
+						<th>Votre Choix</th>								
 						<th>Marque</th>
 						<th>Model</th>
 						<th>Immatriculation</th>
@@ -72,6 +73,7 @@
 				{
 					%>
 					<tr>
+					<td><input type="radio" id="selection" name="choix" value="<%=car.getId() %>"/></td>
 					<td><%=car.getBrand() %></td>    
 					<td><%=car.getModel() %></td>    
 					<td><%=car.getPlateNumber() %></td>
