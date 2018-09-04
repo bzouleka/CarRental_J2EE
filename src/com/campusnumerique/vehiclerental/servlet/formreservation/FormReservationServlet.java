@@ -39,7 +39,7 @@ public class FormReservationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("pages/formResercation.jsp").forward(request, response);
+		request.getRequestDispatcher("pages/formReservation.jsp").forward(request, response);
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
