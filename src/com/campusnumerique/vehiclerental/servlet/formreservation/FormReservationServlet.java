@@ -118,7 +118,9 @@ public class FormReservationServlet extends HttpServlet {
 		
 		try {
 			if (client.hasBooked(startDate, finishDate, reservation)) {
-						// Message erreur deja une location
+				String error = "Vous avez déjà une réservation sur la même période, choisissez d'autres dates";
+				request.setAttribute("error", error);
+				doGet(request,response);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
