@@ -1,5 +1,6 @@
 package com.campusnumerique.vehiclerental.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +11,28 @@ public class ReservationDAO extends DAO<Reservation>{
 
 	@Override
 	public boolean create(Reservation obj) {
-		return false;
+		
+		PreparedStatement ps;
+		String sql = "INSERT INTO reservation(car_id,client_id,startDate,endDate)VALUES(?,?,?,?)";
+		
+		try{
+			
+			ps = (PreparedStatement) this.connection.prepareStatement(sql);
+			
+			java.sql.Date sqlStartDate = new java.sql.Date(obj.getStartDate().getTime());
+			java.sql.Date sqlEndDate = new java.sql.Date(obj.getEndDate().getTime());
+			
+			ps.setInt(1, obj.getCar().getId());
+			ps.setInt(2, obj.getClient().getId());
+			ps.setDate(3, sqlStartDate);
+			ps.setDate(3, sqlEndDate);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 	@Override
