@@ -43,6 +43,17 @@
 				List</a></li>
 		<li class="nav-item"><a class="nav-link" href="./reservation.jsp">Liste
 				des vehicules</a></li>
-				
+		</ul>
+		
+		
+		<h1>Récapitulatif de votre réservation</h1>
+		
+		<p>${ reservation.client.firstName }</p>
+		<p>${ reservation.client.lastName }</p>
+		
+		
+		
+		
+		 	
 				
 				
