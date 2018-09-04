@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.campusnumerique.vehiclerental.dao.CarDAO;
 import com.campusnumerique.vehiclerental.entity.Car;
@@ -53,6 +54,11 @@ public class CarAvailableServlet extends HttpServlet {
 					cars.add(car);
 				}
 			}
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("reservation", reservation);
+			session.setAttribute("distance", distance);
+			
 			request.setAttribute("cars", cars);
 			request.getRequestDispatcher("pages/carAvailable.jsp").forward(request, response);
 			response.setStatus(HttpServletResponse.SC_OK);
