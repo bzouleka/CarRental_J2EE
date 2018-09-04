@@ -25,13 +25,13 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	
 	<!-- General -->
-	<link rel="stylesheet" href="../resources/css/global.css" />
-	<script src="../resources/js/client.js"></script>
+	<link rel="stylesheet" href="resources/css/global.css" />
+	<script src="resources/js/client.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-light " id="header">
 	 <a class="navbar-brand" href="#">
-		<img  src="../resources/images/delorean.png"/>
+		<img  src="resources/images/delorean.png"/>
 	 </a>
 	  <ul class="nav nav-pills">
 	    <li class="nav-item">

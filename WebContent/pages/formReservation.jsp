@@ -42,6 +42,16 @@
 		</ul>
 	</nav>
 	<div class="container" id="content">
+		<div id="errorMessage">
+		<h2>
+			<%
+			if(null!=request.getAttribute("error"))
+			{
+				out.println(request.getAttribute("error"));
+			}
+			%>
+			</h2>
+		</div>
 		<h1 align="center">Réservez votre voiture</h1>
 		<form method="post" action="./reservation">
 			<div class="form-group">
