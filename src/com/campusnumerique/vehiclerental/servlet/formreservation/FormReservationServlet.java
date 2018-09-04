@@ -117,7 +117,7 @@ public class FormReservationServlet extends HttpServlet {
 		}
 		
 		try {
-			if (client.hasBooked(startDate, finishDate, reservation)) {
+			if (!client.hasBooked(startDate, finishDate, reservation)) {
 				String error = "Vous avez déjà une réservation sur la même période, choisissez d'autres dates";
 				request.setAttribute("error", error);
 				doGet(request,response);
