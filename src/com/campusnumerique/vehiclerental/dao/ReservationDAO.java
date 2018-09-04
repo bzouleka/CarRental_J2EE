@@ -96,6 +96,7 @@ public class ReservationDAO extends DAO<Reservation>{
 			Date startDate =  new Date(result.getDate("startDate").getTime());
 			Date endDate = new Date(result.getDate("endDate").getTime());
 			
+			
 			reservation = new Reservation();
 			reservation.setId(result.getInt("id"));
 			reservation.setStartDate(startDate);
