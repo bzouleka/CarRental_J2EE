@@ -3,6 +3,8 @@ package com.campusnumerique.vehiclerental.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -78,6 +80,7 @@ public class ReservationDAO extends DAO<Reservation>{
 			reservation.setEndDate(endDate);
 			reservation.setCar(carDAO.find(result.getInt("car_id")));
 			reservation.setClient(clientDAO.find(result.getInt("client_id")));
+			reservation.setPrice(result.getInt("price"));
 			return reservation;
 		}	
 		return null;
@@ -90,7 +93,7 @@ public class ReservationDAO extends DAO<Reservation>{
 		ResultSet result = this.connection.createStatement(
 		ResultSet.TYPE_SCROLL_INSENSITIVE,
 		ResultSet.CONCUR_READ_ONLY
-		).executeQuery("SELECT * FROM reservation WHERE client_id = " + clientId);
+		).executeQuery("SELECT * FROM reservation WHERE client_id = " + clientId);		
 		if (result.first()){
 			
 			Date startDate =  new Date(result.getDate("startDate").getTime());
@@ -103,10 +106,41 @@ public class ReservationDAO extends DAO<Reservation>{
 			reservation.setEndDate(endDate);
 			reservation.setCar(carDAO.find(result.getInt("car_id")));
 			reservation.setClient(clientDAO.find(result.getInt("client_id")));
+			reservation.setPrice(result.getInt("price"));
 			return reservation;
 		}
 		return reservation;
 	}
+	
+	public ArrayList<Reservation> findAllById(int id)throws SQLException{
+		ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+		CarDAO carDAO = new CarDAO();
+		ClientDAO clientDAO = new ClientDAO();
+		ResultSet result = this.connection
+				.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+				.executeQuery("SELECT (client_id) FROM reservation");
+		while(result.next()){
+			
+			Date startDate =  new Date(result.getDate("startDate").getTime());
+			Date endDate = new Date(result.getDate("endDate").getTime());
+			
+			
+			Reservation reservation = new Reservation();
+			reservation.setId(result.getInt("id"));
+			reservation.setId(result.getInt("id"));
+			reservation.setStartDate(startDate);
+			reservation.setEndDate(endDate);
+			reservation.setCar(carDAO.find(result.getInt("car_id")));
+			reservation.setClient(clientDAO.find(result.getInt("client_id")));
+			reservation.setPrice(result.getInt("price"));
+			
+			reservationList.add(reservation);
+			
+		}
+		return reservationList;
+		
+	
+	}
 
-
+	
 }

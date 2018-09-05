@@ -1,9 +1,12 @@
 package com.campusnumerique.vehiclerental.entity;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import com.campusnumerique.vehiclerental.dao.CarDAO;
+import com.campusnumerique.vehiclerental.dao.ReservationDAO;
 
 public class Reservation {
 	
@@ -12,7 +15,9 @@ public class Reservation {
 	private Client client;
 	private Date startDate;
 	private Date endDate;
+	private int price;
 	
+
 	public Reservation(){
 	}
 	
@@ -23,6 +28,15 @@ public class Reservation {
 		setStartDate(startDate);
 		setEndDate(endDate);
 	}
+	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	
 	public Car getCar() {
 		return car;
@@ -67,6 +81,22 @@ public class Reservation {
 	public float totalPrice(int dist){
 		float totalPrice = car.getReservation() + (car.getKmRate() * dist);
 		return totalPrice;
+	}
+	
+	public boolean fidelity(){
+		ReservationDAO reservationDAO = new ReservationDAO();
+		ArrayList<Reservation> reservationList;
+		try {
+			reservationList = reservationDAO.findAllById(this.client.getId());
+			if(reservationList.size() >= 3){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 	
 }
