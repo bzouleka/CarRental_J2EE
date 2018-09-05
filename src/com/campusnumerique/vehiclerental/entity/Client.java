@@ -6,6 +6,8 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
+import com.campusnumerique.vehiclerental.dao.ClientDAO;
+
 public class Client {
 
 	private int id;
@@ -163,4 +165,13 @@ public class Client {
 		this.password = password;
 	}
 
+	public boolean isAdmin(){
+		
+		if(this.role != "ROLE_ADMIN"){
+			return false;
+		}
+		
+		return true;
+			
+	}
 }

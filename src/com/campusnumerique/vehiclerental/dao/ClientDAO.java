@@ -73,6 +73,8 @@ public class ClientDAO extends DAO<Client>{
 			client.setPermisNb(result.getString("permisNb"));
 			client.setBirhtDate(birthDate);
 			client.setPermisDate(permisDate);
+			client.setPassword(result.getString("password"));
+			client.setRole(result.getString("role"));
 		}
 		return client;
 	}
@@ -97,7 +99,10 @@ public class ClientDAO extends DAO<Client>{
 			client.setMail(result.getString("mail"));
 			client.setPermisNb(result.getString("permisNb"));
 			client.setBirhtDate(birthDate);
-			client.setPermisDate(permisDate);    
+			client.setPermisDate(permisDate);
+			client.setPassword(result.getString("password"));
+			client.setRole(result.getString("role"));
+			
 			clients.add(client);
 		}
 		return clients;
@@ -123,6 +128,8 @@ public class ClientDAO extends DAO<Client>{
 			client.setPermisNb(result.getString("permisNb"));
 			client.setBirhtDate(birthDate);
 			client.setPermisDate(permisDate);
+			client.setPassword(result.getString("password"));
+			client.setRole(result.getString("role"));
 		}
 		return client;
 	}
