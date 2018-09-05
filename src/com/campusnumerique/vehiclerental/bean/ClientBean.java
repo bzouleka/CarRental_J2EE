@@ -3,14 +3,17 @@ package com.campusnumerique.vehiclerental.bean;
 public class ClientBean {
 
 	private String login;
+	private String role;
 
 
 	public ClientBean(){
 		setLogin("NoUserLogin");
+		setRole("IS_ANONYMOUS");
 	}
 
-	public ClientBean(String aLogin){
+	public ClientBean(String aLogin, String aRole){
 		setLogin(aLogin);
+		setRole(aRole);
 	}
 	
 	public String getLogin() {
@@ -19,6 +22,14 @@ public class ClientBean {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	
