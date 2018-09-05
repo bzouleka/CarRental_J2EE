@@ -6,23 +6,25 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
-import org.json.JSONObject;
+import com.campusnumerique.vehiclerental.dao.ClientDAO;
 
 public class Client {
 
 	private int id;
 	private String login;
+	private String password;
 	private String firstName;
 	private String lastName;
 	private String mail;
 	private String permisNb;
+	private String role;
 	private Date birhtDate;
 	private Date permisDate;
-	private boolean isGuest;
+
 
 	public Client() {
 		setLogin("guest");
-		setGuest(true);
+		setRole("IS_GUEST");
 	}
 
 	public Client(int id, String login, String firstName, String lastName, String mail) {
@@ -31,7 +33,7 @@ public class Client {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setMail(mail);
-		setGuest(false);
+		setRole("IS_GUEST");
 	}
 
 	public String getLogin() {
@@ -67,35 +69,12 @@ public class Client {
 		this.mail = mail;
 	}
 
-	public boolean isGuest() {
-		return isGuest;
-	}
-
-	public void setGuest(boolean isGuest) {
-		this.isGuest = isGuest;
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public JSONObject getInfos() {
-		JSONObject infos = new JSONObject();
-		infos.put("login", login);
-		infos.put("id", id);
-		infos.put("firstName", firstName);
-		infos.put("lastName", lastName);
-		infos.put("mail", mail);
-		infos.put("isGuest", isGuest);
-		return infos;
-	}
-
-	public String toString() {
-		return getInfos().toString();
 	}
 
 	public String getPermisNb() {
@@ -170,4 +149,29 @@ public class Client {
 
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public boolean isAdmin(){
+		
+		if(this.role != "ROLE_ADMIN"){
+			return false;
+		}
+		
+		return true;
+			
+	}
 }
