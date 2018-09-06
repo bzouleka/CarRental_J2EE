@@ -16,7 +16,7 @@ public class ReservationDAO extends DAO<Reservation>{
 	public boolean create(Reservation obj) {
 		
 		PreparedStatement ps;
-		String sql = "INSERT INTO reservation(car_id,client_id,startDate,endDate)VALUES(?,?,?,?)";
+		String sql = "INSERT INTO reservation(car_id,client_id,startDate,endDate,price)VALUES(?,?,?,?,?)";
 		
 		try{
 			
@@ -29,6 +29,7 @@ public class ReservationDAO extends DAO<Reservation>{
 			ps.setInt(2, obj.getClient().getId());
 			ps.setDate(3, sqlStartDate);
 			ps.setDate(4, sqlEndDate);
+			ps.setFloat(5, obj.getPrice());
 			
 			ps.executeUpdate();
 			
@@ -93,8 +94,10 @@ public class ReservationDAO extends DAO<Reservation>{
 		ResultSet result = this.connection.createStatement(
 		ResultSet.TYPE_SCROLL_INSENSITIVE,
 		ResultSet.CONCUR_READ_ONLY
-		).executeQuery("SELECT * FROM reservation WHERE client_id = " + clientId);		
+		).executeQuery("SELECT * FROM reservation WHERE client_id = \"" + clientId + "\"");		
 		if (result.first()){
+			
+			reservation = new Reservation();
 			
 			Date startDate =  new Date(result.getDate("startDate").getTime());
 			Date endDate = new Date(result.getDate("endDate").getTime());
@@ -118,7 +121,7 @@ public class ReservationDAO extends DAO<Reservation>{
 		ClientDAO clientDAO = new ClientDAO();
 		ResultSet result = this.connection
 				.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
-				.executeQuery("SELECT (client_id) FROM reservation");
+				.executeQuery("SELECT * FROM reservation WHERE client_id = \"" + id + "\"");
 		while(result.next()){
 			
 			Date startDate =  new Date(result.getDate("startDate").getTime());

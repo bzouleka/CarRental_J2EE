@@ -6,8 +6,8 @@
 <%@page import="com.campusnumerique.vehiclerental.entity.Car"%>
 
 <jsp:useBean id="client" scope="session"
-	class="com.campusnumerique.vehiclerental.bean.ClientBean" />
-
+	class="com.campusnumerique.vehiclerental.bean.ClientBean" >
+</jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +34,17 @@
 		<a class="navbar-brand" href="#"> <img
 			src="resources/images/delorean.png" />
 		</a>
+		<h3>
+		${client.login}
+		</h3>
 		<ul class="nav nav-pills">
+			<% if (client.getRole().equals("ROLE_ADMIN")){
+				%>
+				<li class="nav-item"><a class="nav-link" href="./listReservation">Reservations
+					List</a></li>
+				<% 
+			} %>
+			
 			<li class="nav-item"><a class="nav-link" href="./clients.jsp">Client
 					List</a></li>
 			<li class="nav-item"><a class="nav-link" href="./CarServlet">Car
@@ -68,7 +78,7 @@
 			</div>
 			<div class="form-group">
 				<label for="permisNb">Numéro de permis</label> <input type="text"
-					class="form-control" id="permisNb" name="permisNb" value="123456789"
+					class="form-control" id="permisNb" name="permisNb"
 					placeholder="Votre numéro de permis">
 			</div>
 			<div class="form-group">

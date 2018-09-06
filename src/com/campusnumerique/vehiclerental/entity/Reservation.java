@@ -15,7 +15,7 @@ public class Reservation {
 	private Client client;
 	private Date startDate;
 	private Date endDate;
-	private int price;
+	private float price;
 
 	public Reservation() {
 	}
@@ -28,11 +28,11 @@ public class Reservation {
 		setEndDate(endDate);
 	}
 
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
@@ -106,10 +106,11 @@ public class Reservation {
 		return false;
 	}
 	
-	public void getDiscount(float discount){
+	public float getDiscount(float discount){
 		
-		this.price = (int) (this.price / (1 + (discount / 100)));		
-			
+		this.price = (float) (this.price * (1-(discount/100)));		
+		
+		return this.price;
 	}
 
 }

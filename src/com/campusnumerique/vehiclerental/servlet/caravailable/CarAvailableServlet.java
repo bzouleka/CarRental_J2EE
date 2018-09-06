@@ -84,6 +84,7 @@ public class CarAvailableServlet extends HttpServlet {
 		int distance = (int) session.getAttribute("distance");
 		Reservation reservation = (Reservation) session.getAttribute("reservation");
 		
+		String remiseString = request.getParameter("remise");
 		String idSelectCarString = request.getParameter("selection");
 		int idSelectCar = Integer.parseInt(idSelectCarString);
 		
@@ -95,13 +96,21 @@ public class CarAvailableServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		
+		
+		float totalPrice = reservation.totalPrice(distance);
+		reservation.setPrice(totalPrice);
+		
+		if(!remiseString.equals(null)){
+			int remise = Integer.parseInt(remiseString);
+			float discountPrice = reservation.getDiscount(remise);
+			reservation.setPrice(discountPrice);
+		}
 		ReservationDAO reservationDAO = new ReservationDAO();
 		reservationDAO.create(reservation);
 		
-		float totalPrice = reservation.totalPrice(distance);
 			
 		request.setAttribute("reservation", reservation);
-		request.setAttribute("totalPrice", totalPrice);
 		RequestDispatcher req = request.getRequestDispatcher("/recap");
 		req.forward(request, response);
 	}

@@ -8,7 +8,8 @@
 <%@page import="java.util.List"%>
 
 <jsp:useBean id="client" scope="session"
-	class="com.campusnumerique.vehiclerental.bean.ClientBean" />
+	class="com.campusnumerique.vehiclerental.bean.ClientBean" >
+</jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,6 +37,9 @@
 		class="navbar-brand" href="#"> <img
 		src="resources/images/delorean.png" />
 	</a>
+	<h3>
+		${client.login}
+		</h3>
 	<ul class="nav nav-pills">
 		<li class="nav-item"><a class="nav-link" href="./clients.jsp">Client
 				List</a></li>
@@ -62,6 +66,7 @@
 		<p> Immatriculation : ${ reservation.car.plateNumber }</p>
 		<p> Couleur : ${ reservation.car.color }</p>
 		<p> Chevaux fiscaux : ${ reservation.car.cv }</p>
+		<p> Prix : ${ reservation.price } </p>
 		
 		
 		</div>

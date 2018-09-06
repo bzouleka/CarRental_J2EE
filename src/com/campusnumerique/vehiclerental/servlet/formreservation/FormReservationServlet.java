@@ -51,7 +51,9 @@ public class FormReservationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
+		if(null == request.getParameter("nom")){
+			doGet(request,response);
+		}else{
 		Date birthDate = null;
 		Date startDate = null;
 		Date finishDate = null;
@@ -99,7 +101,13 @@ public class FormReservationServlet extends HttpServlet {
 		}
 		
 		if( client == null){
-			client = currentClient;
+			client = new Client();
+			client.setFirstName(currentClient.getFirstName());
+			client.setLastName(currentClient.getLastName());
+			client.setMail(currentClient.getMail());
+			client.setPermisNb(currentClient.getPermisNb());
+			client.setBirhtDate(currentClient.getBirhtDate());
+			client.setPermisDate(currentClient.getPermisDate());
 			clientDAO.create(client);
 			try {
 				client = clientDAO.findByPermisNb(client.getPermisNb());
@@ -138,5 +146,5 @@ public class FormReservationServlet extends HttpServlet {
 		req.forward(request, response);
 		}
 	}
-
+	}
 }

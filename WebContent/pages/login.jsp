@@ -36,12 +36,6 @@
 		<a class="navbar-brand" href="#"> <img
 			src="resources/images/delorean.png" />
 		</a>
-		<ul class="nav nav-pills">
-			<li class="nav-item"><a class="nav-link" href="./clients.jsp">Client
-					List</a></li>
-			<li class="nav-item"><a class="nav-link" href="./CarServlet">Car
-					List</a></li>
-		</ul>
 	</nav>
 	<br>
 	<div class="container">

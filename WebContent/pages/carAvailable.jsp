@@ -8,7 +8,9 @@
 <%@page import="java.util.List"%>
 
 <jsp:useBean id="client" scope="session"
-	class="com.campusnumerique.vehiclerental.bean.ClientBean" />
+	class="com.campusnumerique.vehiclerental.bean.ClientBean">
+</jsp:useBean>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,6 +38,7 @@
 		class="navbar-brand" href="#"> <img
 		src="resources/images/delorean.png" />
 	</a>
+	<h3>${client.login}</h3>
 	<ul class="nav nav-pills">
 		<li class="nav-item"><a class="nav-link" href="./clients.jsp">Client
 				List</a></li>
@@ -62,6 +65,15 @@
 							<th>Prix Réservation</th>
 							<th>Prix au KM</th>
 							<th>Chevaux Fiscaux</th>
+							<th><%
+									Reservation reservation = (Reservation) request.getAttribute("reservation");
+									if (reservation.fidelity() && client.getRole().equals("ROLE_ADMIN")) {
+								%>
+								 Remise 
+								<%
+									}
+								%>
+							</th>
 						</tr>
 
 					</thead>
@@ -71,6 +83,7 @@
 							List<Car> cars = (List<Car>) request.getAttribute("cars");
 							for (Car car : cars) {
 						%>
+						
 						<tr>
 							<td><input type="radio" id="selection" name="selection"
 								value="<%=car.getId()%>" /></td>
@@ -81,6 +94,15 @@
 							<td><%=car.getReservation()%></td>
 							<td><%=car.getKmRate()%></td>
 							<td><%=car.getCv()%></td>
+							<td><%
+							 if (reservation.fidelity() && client.getRole().equals("ROLE_ADMIN")) {
+								%>
+								 <input type="text" id="remise" name="remise">
+								 <%										
+								}
+								%>
+							</td>
+							
 						</tr>
 						<%
 							}
