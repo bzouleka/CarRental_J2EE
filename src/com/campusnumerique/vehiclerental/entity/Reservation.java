@@ -105,5 +105,11 @@ public class Reservation {
 
 		return false;
 	}
+	
+	public void getDiscount(float discount){
+		
+		this.price = (int) (this.price / (1 + (discount / 100)));		
+			
+	}
 
 }
