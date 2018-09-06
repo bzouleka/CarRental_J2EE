@@ -54,7 +54,7 @@ public class ClientDAO extends DAO<Client>{
 
 	@Override
 	public Client find(int id) throws SQLException{
-		Client client = new Client();  
+		Client client = null;  
 		
 		ResultSet result = this.connection.createStatement(
 		    ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -62,9 +62,9 @@ public class ClientDAO extends DAO<Client>{
 		  ).executeQuery("SELECT * FROM client WHERE id = " + id);
 
 		if(result.first()){
-			
+			client = new Client();
 			Date birthDate = new Date(result.getDate("birthDate").getTime());
-			Date permisDate = new Date(result.getDate("permisDate").getTime());
+			Date permisDate = new Date(result.getDate("getPermisDate").getTime());
 			
 			client.setId(result.getInt("id"));
 			client.setFirstName(result.getString("firstName"));
@@ -90,7 +90,7 @@ public class ClientDAO extends DAO<Client>{
 		while(result.next()){
 			
 			Date birthDate = new Date(result.getDate("birthDate").getTime());
-			Date permisDate = new Date(result.getDate("permisDate").getTime());
+			Date permisDate = new Date(result.getDate("getPermisDate").getTime());
 			
 			Client client = new Client(); 
 			client.setId(result.getInt("id"));
@@ -118,7 +118,7 @@ public class ClientDAO extends DAO<Client>{
 		if(result.first()){
 			
 			Date birthDate = new Date(result.getDate("birthDate").getTime());
-			Date permisDate = new Date(result.getDate("permisDate").getTime());
+			Date permisDate = new Date(result.getDate("getPermisDate").getTime());
 			
 			client = new Client();
 			client.setId(result.getInt("id"));
@@ -133,4 +133,32 @@ public class ClientDAO extends DAO<Client>{
 		}
 		return client;
 	}
+	
+	public Client findByEmail(String email)throws SQLException {
+		Client client = null;
+		
+		ResultSet result = this.connection.createStatement(
+			    ResultSet.TYPE_SCROLL_INSENSITIVE, 
+			    ResultSet.CONCUR_READ_ONLY
+			  ).executeQuery("SELECT * FROM client WHERE mail = \"" + email + "\" ");
+			if(result.first()){
+				
+				Date birthDate = new Date(result.getDate("birthDate").getTime());
+				Date permisDate = new Date(result.getDate("getPermisDate").getTime());
+				
+				client = new Client();
+				client.setId(result.getInt("id"));
+				client.setFirstName(result.getString("firstName"));
+				client.setLastName(result.getString("lastName"));
+				client.setMail(result.getString("mail"));
+				client.setPermisNb(result.getString("permisNb"));
+				client.setBirhtDate(birthDate);
+				client.setPermisDate(permisDate);
+				client.setPassword(result.getString("password"));
+				client.setRole(result.getString("role"));
+			}
+			return client;
+		
+	}
+	
 }

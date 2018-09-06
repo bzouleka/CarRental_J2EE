@@ -167,11 +167,11 @@ public class Client {
 
 	public boolean isAdmin(){
 		
-		if(this.role != "ROLE_ADMIN"){
-			return false;
+		if(this.role.equals("ROLE_ADMIN")){
+			return true;
 		}
 		
-		return true;
+		return false;
 			
 	}
 }

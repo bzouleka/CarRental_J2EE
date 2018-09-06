@@ -8,7 +8,7 @@ public class ClientBean {
 
 	public ClientBean(){
 		setLogin("NoUserLogin");
-		setRole("IS_ANONYMOUS");
+		setRole("IS_GUEST");
 	}
 
 	public ClientBean(String aLogin, String aRole){
